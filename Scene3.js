@@ -30,6 +30,7 @@ class Scene3 extends Phaser.Scene {
       this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
       //this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
+      this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 32,});
       //this.load.spritesheet('atlas', 'assets/atlas/Perso/Perso.png', { frameWidth:24, frameHeight: 20,});
 
     
@@ -156,7 +157,31 @@ class Scene3 extends Phaser.Scene {
 
       cursors = this.input.keyboard.createCursorKeys();
 
+      const anims = this.anims;
 
+        anims.create({
+            key: 'down',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 4 }),
+            frameRate: 5,
+        });
+
+        anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
+            frameRate: 5,
+        });
+
+        anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('player', { start: 9, end: 12 }),
+            frameRate: 5,
+        });
+
+        anims.create({
+            key: 'up',
+            frames: this.anims.generateFrameNumbers('player', { start: 13, end: 16 }),
+            frameRate: 5,
+        });
     }
 
     update (){
@@ -190,25 +215,25 @@ class Scene3 extends Phaser.Scene {
       player.body.velocity.normalize().scale(speed);
 
       // Update the animation last and give left/right animations precedence over up/down animations
-     /* 
-     if (cursors.left.isDown) {
-          player.anims.play("Perso-left-walk", true);
+      if (cursors.left.isDown) {
+        player.anims.play("left", true);
       } else if (cursors.right.isDown) {
-          player.anims.play("Perso-right-walk", true);
+        player.anims.play("right", true);
       } else if (cursors.up.isDown) {
-          player.anims.play("Perso-back-walk", true);
+        player.anims.play("up", true);
       } else if (cursors.down.isDown) {
-          player.anims.play("Perso-front-walk", true);
+        player.anims.play("down", true);
       } else {
-          player.anims.stop();
-          // If we were moving, pick and idle frame to use
-          
-          if (prevVelocity.x < 0) player.setTexture("atlas", "Perso-left");
-          else if (prevVelocity.x > 0) player.setTexture("atlas", "Perso-right");
-          else if (prevVelocity.y < 0) player.setTexture("atlas", "Perso-back");
-          else if (prevVelocity.y > 0) player.setTexture("atlas", "Perso-front");
-      } 
-      */
+        player.anims.stop();
+        // If we were moving, pick and idle frame to use
+        
+        if (prevVelocity.x < 0) player.setTexture('player');
+        else if (prevVelocity.x > 0) player.setTexture('player');
+        else if (prevVelocity.y < 0) player.setTexture('player');
+        else if (prevVelocity.y > 0) player.setTexture('player');
+      
+        
+      }  
     }
 }
 function SortiP1(player,porte)

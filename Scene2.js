@@ -50,9 +50,8 @@ class Scene2 extends Phaser.Scene{
         this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
         this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
-        this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
-        //this.load.spritesheet('atlas', 'assets/atlas/Perso/Perso.png', { frameWidth:24, frameHeight: 20,});
-        
+        this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
+       
     }
 
     create(){
@@ -260,58 +259,36 @@ class Scene2 extends Phaser.Scene{
         cursors = this.input.keyboard.createCursorKeys();
         cursors2 = this.input.keyboard.addKeys('A,Z,S,Q,D,T,space');
         
-        /*
+        
         const anims = this.anims;
+
         anims.create({
-            key: "Perso-left-walk",
-            frames: anims.generateFrameNames("atlas", {
-            prefix: "Perso-left-walk.",
-            start: 0,
-            end: 3,
-            zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
+            key: 'down',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+            frameRate: 5,
         });
+
         anims.create({
-            key: "Perso-right-walk",
-            frames: anims.generateFrameNames("atlas", {
-            prefix: "Perso-right-walk.",
-            start: 0,
-            end: 3,
-            zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('player', { start: 4, end: 7 }),
+            frameRate: 5,
         });
+
         anims.create({
-            key: "Perso-front-walk",
-            frames: anims.generateFrameNames("atlas", {
-            prefix: "Perso-front-walk.",
-            start: 0,
-            end: 3,
-            zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+            frameRate: 5,
         });
+
         anims.create({
-            key: "Perso-back-walk",
-            frames: anims.generateFrameNames("atlas", {
-            prefix: "Perso-back-walk.",
-            start: 0,
-            end: 3,
-            zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
+            key: 'up',
+            frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
+            frameRate: 5,
         });
-    */
 
     }
 
     update (){
-
 
         for (const enemie1 of enemies1.children.entries) {
             if (enemie1.body.blocked.up) {
@@ -334,7 +311,6 @@ class Scene2 extends Phaser.Scene{
            
         }
 
-
         for (const enemie2 of enemies2.children.entries) {
             if (enemie2.body.blocked.right) {
                 enemie2.direction = 'LEFT';
@@ -353,7 +329,6 @@ class Scene2 extends Phaser.Scene{
                 enemie2.setFlipX(true);
                 
             }
-           
         }
         
         this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
@@ -363,7 +338,6 @@ class Scene2 extends Phaser.Scene{
         this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
             .setScrollFactor(0);
-
 
         if(invincible == true){
             compteur-- ;
@@ -424,27 +398,27 @@ class Scene2 extends Phaser.Scene{
         player.body.velocity.normalize().scale(speed);
 
         // Update the animation last and give left/right animations precedence over up/down animations
-        /*
+        
         if (cursors.left.isDown) {
-            player.anims.play("Perso-left-walk", true);
+            player.anims.play("left", true);
         } else if (cursors.right.isDown) {
-            player.anims.play("Perso-right-walk", true);
+            player.anims.play("right", true);
         } else if (cursors.up.isDown) {
-            player.anims.play("Perso-back-walk", true);
+            player.anims.play("up", true);
         } else if (cursors.down.isDown) {
-            player.anims.play("Perso-front-walk", true);
+            player.anims.play("down", true);
         } else {
             player.anims.stop();
             // If we were moving, pick and idle frame to use
             
-            if (prevVelocity.x < 0) player.setTexture("atlas", "Perso-left");
-            else if (prevVelocity.x > 0) player.setTexture("atlas", "Perso-right");
-            else if (prevVelocity.y < 0) player.setTexture("atlas", "Perso-back");
-            else if (prevVelocity.y > 0) player.setTexture("atlas", "Perso-front");
+            if (prevVelocity.x < 0) player.setTexture('player');
+            else if (prevVelocity.x > 0) player.setTexture('player');
+            else if (prevVelocity.y < 0) player.setTexture('player');
+            else if (prevVelocity.y > 0) player.setTexture('player');
           
            
         }  
-        */
+        
 
         const JustDownA = Phaser.Input.Keyboard.JustDown(cursors2.A)       
     
