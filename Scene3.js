@@ -190,7 +190,8 @@ class Scene3 extends Phaser.Scene {
       player.body.velocity.normalize().scale(speed);
 
       // Update the animation last and give left/right animations precedence over up/down animations
-      if (cursors.left.isDown) {
+     /* 
+     if (cursors.left.isDown) {
           player.anims.play("Perso-left-walk", true);
       } else if (cursors.right.isDown) {
           player.anims.play("Perso-right-walk", true);
@@ -201,17 +202,13 @@ class Scene3 extends Phaser.Scene {
       } else {
           player.anims.stop();
           // If we were moving, pick and idle frame to use
-          /*
+          
           if (prevVelocity.x < 0) player.setTexture("atlas", "Perso-left");
           else if (prevVelocity.x > 0) player.setTexture("atlas", "Perso-right");
           else if (prevVelocity.y < 0) player.setTexture("atlas", "Perso-back");
           else if (prevVelocity.y > 0) player.setTexture("atlas", "Perso-front");
-          */
-          if (prevVelocity.x < 0) player.setTexture('player');
-          else if (prevVelocity.x > 0) player.setTexture('player');
-          else if (prevVelocity.y < 0) player.setTexture('player');
-          else if (prevVelocity.y > 0) player.setTexture('player');
-      }
+      } 
+      */
     }
 }
 function SortiP1(player,porte)
