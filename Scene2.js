@@ -1,3 +1,20 @@
+
+var SortiePorte1;
+var SortiePorte2;
+var SortiePorte3;
+var SortiePorte4;
+var SortiePorte5;
+var SortiePorte6;
+var SortiePorte7;
+var SortiePorte8;
+var entPorte1;
+var entPorte2;
+var entPorte3;
+var entPorte4;
+var entPorte5;
+var entPorte6;
+var entPorte7;
+var entPorte8;
 var cursors;
 var player;
 var enemie1;
@@ -18,6 +35,7 @@ var itemlife;
 var itemarrow;
 var itemlifes;
 var itemarrows;
+var porte;
 
 class Scene2 extends Phaser.Scene{
     constructor(){
@@ -30,7 +48,7 @@ class Scene2 extends Phaser.Scene{
 
 
         this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
-        this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town2.json");
+        this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
         this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
         //this.load.spritesheet('atlas', 'assets/atlas/Perso/Perso.png', { frameWidth:24, frameHeight: 20,});
@@ -51,22 +69,86 @@ class Scene2 extends Phaser.Scene{
         worldLayer.setCollisionByProperty({ collides: true });
         aboveLayer.setDepth(10);
 
-    
+        
+        //spawn joueur
+        SortiePorte1 = map.findObject("PortesExt", obj => obj.name === "SortiePorte1");
+        SortiePorte2 = map.findObject("PortesExt", obj => obj.name === "SortiePorte2");
+        SortiePorte3 = map.findObject("PortesExt", obj => obj.name === "SortiePorte3");
+        SortiePorte4 = map.findObject("PortesExt", obj => obj.name === "SortiePorte4");
+        SortiePorte5 = map.findObject("PortesExt", obj => obj.name === "SortiePorte5");
+        SortiePorte6 = map.findObject("PortesExt", obj => obj.name === "SortiePorte6");
+        SortiePorte7 = map.findObject("PortesExt", obj => obj.name === "SortiePorte7");
+        SortiePorte8 = map.findObject("PortesExt", obj => obj.name === "SortiePorte8");
+
+        
+
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
 
-        player = this.physics.add
-            .sprite(spawnPoint.x, spawnPoint.y, "atlas", "Perso-front")
-            .setSize(32, 32,)
-            .setOffset(0, 32);
- 
+        console.log(portesorti);
+
+        if(portesorti == 'SorPorte1'){
+            player = this.physics.add
+                .sprite(SortiePorte1.x, SortiePorte1.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte2'){
+            player = this.physics.add
+                .sprite(SortiePorte2.x, SortiePorte2.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte3'){
+            player = this.physics.add
+                .sprite(SortiePorte3.x, SortiePorte3.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte4'){
+            player = this.physics.add
+                .sprite(SortiePorte4.x, SortiePorte4.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte5'){
+            player = this.physics.add
+                .sprite(SortiePorte5.x, SortiePorte5.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte6'){
+            player = this.physics.add
+                .sprite(SortiePorte6.x, SortiePorte6.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte7'){
+            player = this.physics.add
+                .sprite(SortiePorte7.x, SortiePorte7.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else if(portesorti == 'SorPorte8'){
+            player = this.physics.add
+                .sprite(SortiePorte8.x, SortiePorte8.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+          }
+        else {
+            player = this.physics.add
+                .sprite(spawnPoint.x, spawnPoint.y, "atlas", "Perso-front")
+                .setSize(32, 32,)
+                .setOffset(0, 32);
+        }
+
 
         const camera = this.cameras.main;
         camera.startFollow(player);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         //camera.setBounds(0, 0, player.widthInPixels, player.heightInPixels);
 
+
         //Enemie////////////////////////
-        
         const enemieObjects = map.getObjectLayer('EnemiesVer').objects;
         enemies1 = this.physics.add.group({
         }); 
@@ -101,6 +183,53 @@ class Scene2 extends Phaser.Scene{
             enemie2.direction = 'RIGHT';
             enemie2.isDed = false;
         }  
+
+        //Porte
+
+        const Porte1 = map.findObject("PortesExt", obj => obj.name === "Porte1");
+        entPorte1 = this.physics.add.sprite(Porte1.x, Porte1.y)
+        .setSize(32, 32,)
+        
+        const Porte2 = map.findObject("PortesExt", obj => obj.name === "Porte2");
+        entPorte2 = this.physics.add.sprite(Porte2.x, Porte2.y)
+        .setSize(32, 32,)
+        
+        const Porte3 = map.findObject("PortesExt", obj => obj.name === "Porte3");
+        entPorte3 = this.physics.add.sprite(Porte3.x, Porte3.y)
+        .setSize(32, 32,)
+
+        const Porte4 = map.findObject("PortesExt", obj => obj.name === "Porte4");
+        entPorte4= this.physics.add.sprite(Porte4.x, Porte4.y)
+        .setSize(32, 32,)
+
+        const Porte5 = map.findObject("PortesExt", obj => obj.name === "Porte5");
+        entPorte5 = this.physics.add.sprite(Porte5.x, Porte5.y)
+        .setSize(32, 32,)
+
+        const Porte6 = map.findObject("PortesExt", obj => obj.name === "Porte6");
+        entPorte6 = this.physics.add.sprite(Porte6.x, Porte6.y)
+        .setSize(32, 32,)
+
+        const Porte7 = map.findObject("PortesExt", obj => obj.name === "Porte7");
+        entPorte7 = this.physics.add.sprite(Porte7.x, Porte7.y)
+        .setSize(32, 32,)
+
+        const Porte8 = map.findObject("PortesExt", obj => obj.name === "Porte8");
+        entPorte8 = this.physics.add.sprite(Porte8.x, Porte8.y)
+        .setSize(32, 32,)
+
+
+
+        this.physics.add.collider(player, entPorte1,EntrerP1, null, this);
+        this.physics.add.collider(player, entPorte2,EntrerP2, null, this);
+        this.physics.add.collider(player, entPorte3,EntrerP3, null, this);
+        this.physics.add.collider(player, entPorte4,EntrerP4, null, this);
+        this.physics.add.collider(player, entPorte5,EntrerP5, null, this);
+        this.physics.add.collider(player, entPorte6,EntrerP6, null, this);
+        this.physics.add.collider(player, entPorte7,EntrerP7, null, this);
+        this.physics.add.collider(player, entPorte8,EntrerP8, null, this);
+
+
 
 
         shoots = this.physics.add.group();
@@ -383,4 +512,44 @@ function addlife(player, itemlife)
     if(life < 3 ){
         life = life + 1 ; 
     }
+}
+function EntrerP1(player,porte1)
+{
+    this.scene.start("House");
+    porte = 'Porte1' ;
+}
+function EntrerP2(player,porte2)
+{
+    this.scene.start("House");
+    porte = 'Porte2' ;
+}
+function EntrerP3(player,porte3)
+{
+    this.scene.start("House");
+    porte = 'Porte3' ;
+}
+function EntrerP4(player,porte3)
+{
+    this.scene.start("House");
+    porte = 'Porte3' ;
+}
+function EntrerP5(player,porte4)
+{
+    this.scene.start("House");
+    porte = 'Porte4' ;
+}
+function EntrerP6(player,porte5)
+{
+    this.scene.start("House");
+    porte = 'Porte5' ;
+}
+function EntrerP7(player,porte6)
+{
+    this.scene.start("House");
+    porte = 'Porte6' ;
+}
+function EntrerP8(player,porte7)
+{
+    this.scene.start("House");
+    porte = 'Porte7' ;
 }
