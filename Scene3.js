@@ -58,41 +58,49 @@ class Scene3 extends Phaser.Scene {
       if(porte == 'Porte1'){
         player = this.physics.add
         .sprite(EntrerPorte1.x, EntrerPorte1.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       }
       if(porte == 'Porte2'){
         player = this.physics.add.sprite(EntrerPorte2.x,EntrerPorte2.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte3'){
         player = this.physics.add.sprite(EntrerPorte3.x,EntrerPorte3.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte4'){
         player = this.physics.add.sprite(EntrerPorte4.x,EntrerPorte4.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte5'){
         player = this.physics.add.sprite(EntrerPorte5.x,EntrerPorte5.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte6'){
         player = this.physics.add.sprite(EntrerPorte6.x,EntrerPorte6.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte7'){
         player = this.physics.add.sprite(EntrerPorte7.x,EntrerPorte7.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
       if(porte == 'Porte8'){
         player = this.physics.add.sprite(EntrerPorte8.x,EntrerPorte8.y, 'player')
+        .setDepth(6)
         .setSize(32, 32,)
         .setOffset(0, 32);
       } 
