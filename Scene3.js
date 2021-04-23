@@ -29,13 +29,9 @@ class Scene3 extends Phaser.Scene {
       this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
       this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
-      //this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
-      this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 32,});
-      //this.load.spritesheet('atlas', 'assets/atlas/Perso/Perso.png', { frameWidth:24, frameHeight: 20,});
-
+      
+      this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
     
-
-
     }
 
     create(){
@@ -61,7 +57,6 @@ class Scene3 extends Phaser.Scene {
       
       if(porte == 'Porte1'){
         player = this.physics.add
-        //.sprite(EntrerPorte1.x, EntrerPorte1.y, "atlas", "Perso-front")
         .sprite(EntrerPorte1.x, EntrerPorte1.y, 'player')
         .setSize(32, 32,)
         .setOffset(0, 32);

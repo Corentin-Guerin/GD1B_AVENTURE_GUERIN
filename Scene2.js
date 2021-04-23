@@ -86,7 +86,6 @@ class Scene2 extends Phaser.Scene{
 
         if(portesorti == 'SorPorte1'){
             player = this.physics.add
-                //.sprite(SortiePorte1.x, SortiePorte1.y, "atlas", "Perso-front")
                 .sprite(SortiePorte1.x, SortiePorte1.y,  'player')
                
                 .setSize(32, 32,)
