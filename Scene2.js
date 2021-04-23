@@ -259,7 +259,8 @@ class Scene2 extends Phaser.Scene{
 
         cursors = this.input.keyboard.createCursorKeys();
         cursors2 = this.input.keyboard.addKeys('A,Z,S,Q,D,T,space');
-
+        
+        /*
         const anims = this.anims;
         anims.create({
             key: "Perso-left-walk",
@@ -305,7 +306,7 @@ class Scene2 extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
-    
+    */
 
     }
 
