@@ -57,11 +57,11 @@ class Scene3 extends Phaser.Scene {
       EntrerPorte7 = map.findObject("PorteInt", obj => obj.name === "EntrerPorte7");
       EntrerPorte8 = map.findObject("PorteInt", obj => obj.name === "EntrerPorte8");
 
-      console.log(porte);
-
+      
       if(porte == 'Porte1'){
         player = this.physics.add
-        .sprite(EntrerPorte1.x, EntrerPorte1.y, "atlas", "Perso-front")
+        //.sprite(EntrerPorte1.x, EntrerPorte1.y, "atlas", "Perso-front")
+        .sprite(EntrerPorte1.x, EntrerPorte1.y, 'player')
         .setSize(32, 32,)
         .setOffset(0, 32);
       }
@@ -201,10 +201,16 @@ class Scene3 extends Phaser.Scene {
       } else {
           player.anims.stop();
           // If we were moving, pick and idle frame to use
+          /*
           if (prevVelocity.x < 0) player.setTexture("atlas", "Perso-left");
           else if (prevVelocity.x > 0) player.setTexture("atlas", "Perso-right");
           else if (prevVelocity.y < 0) player.setTexture("atlas", "Perso-back");
           else if (prevVelocity.y > 0) player.setTexture("atlas", "Perso-front");
+          */
+          if (prevVelocity.x < 0) player.setTexture('player');
+          else if (prevVelocity.x > 0) player.setTexture('player');
+          else if (prevVelocity.y < 0) player.setTexture('player');
+          else if (prevVelocity.y > 0) player.setTexture('player');
       }
     }
 }

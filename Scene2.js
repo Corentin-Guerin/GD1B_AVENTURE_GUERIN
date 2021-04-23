@@ -84,59 +84,60 @@ class Scene2 extends Phaser.Scene{
 
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
 
-        console.log(portesorti);
 
         if(portesorti == 'SorPorte1'){
             player = this.physics.add
-                .sprite(SortiePorte1.x, SortiePorte1.y, "atlas", "Perso-front")
+                //.sprite(SortiePorte1.x, SortiePorte1.y, "atlas", "Perso-front")
+                .sprite(SortiePorte1.x, SortiePorte1.y,  'player')
+               
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte2'){
             player = this.physics.add
-                .sprite(SortiePorte2.x, SortiePorte2.y, "atlas", "Perso-front")
+                .sprite(SortiePorte2.x, SortiePorte2.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte3'){
             player = this.physics.add
-                .sprite(SortiePorte3.x, SortiePorte3.y, "atlas", "Perso-front")
+                .sprite(SortiePorte3.x, SortiePorte3.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte4'){
             player = this.physics.add
-                .sprite(SortiePorte4.x, SortiePorte4.y, "atlas", "Perso-front")
+                .sprite(SortiePorte4.x, SortiePorte4.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte5'){
             player = this.physics.add
-                .sprite(SortiePorte5.x, SortiePorte5.y, "atlas", "Perso-front")
+                .sprite(SortiePorte5.x, SortiePorte5.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte6'){
             player = this.physics.add
-                .sprite(SortiePorte6.x, SortiePorte6.y, "atlas", "Perso-front")
+                .sprite(SortiePorte6.x, SortiePorte6.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte7'){
             player = this.physics.add
-                .sprite(SortiePorte7.x, SortiePorte7.y, "atlas", "Perso-front")
+                .sprite(SortiePorte7.x, SortiePorte7.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte8'){
             player = this.physics.add
-                .sprite(SortiePorte8.x, SortiePorte8.y, "atlas", "Perso-front")
+                .sprite(SortiePorte8.x, SortiePorte8.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else {
             player = this.physics.add
-                .sprite(spawnPoint.x, spawnPoint.y, "atlas", "Perso-front")
+                .sprite(spawnPoint.x, spawnPoint.y,  'player')
                 .setSize(32, 32,)
                 .setOffset(0, 32);
         }
@@ -433,10 +434,17 @@ class Scene2 extends Phaser.Scene{
         } else {
             player.anims.stop();
             // If we were moving, pick and idle frame to use
+            /*
             if (prevVelocity.x < 0) player.setTexture("atlas", "Perso-left");
             else if (prevVelocity.x > 0) player.setTexture("atlas", "Perso-right");
             else if (prevVelocity.y < 0) player.setTexture("atlas", "Perso-back");
             else if (prevVelocity.y > 0) player.setTexture("atlas", "Perso-front");
+            */
+            if (prevVelocity.x < 0) player.setTexture( 'player');
+            else if (prevVelocity.x > 0) player.setTexture( 'player');
+            else if (prevVelocity.y < 0) player.setTexture( 'player');
+            else if (prevVelocity.y > 0) player.setTexture( 'player');
+           
         }
 
         const JustDownA = Phaser.Input.Keyboard.JustDown(cursors2.A)       
@@ -528,28 +536,28 @@ function EntrerP3(player,porte3)
     this.scene.start("House");
     porte = 'Porte3' ;
 }
-function EntrerP4(player,porte3)
-{
-    this.scene.start("House");
-    porte = 'Porte3' ;
-}
-function EntrerP5(player,porte4)
+function EntrerP4(player,porte4)
 {
     this.scene.start("House");
     porte = 'Porte4' ;
 }
-function EntrerP6(player,porte5)
+function EntrerP5(player,porte5)
 {
     this.scene.start("House");
     porte = 'Porte5' ;
 }
-function EntrerP7(player,porte6)
+function EntrerP6(player,porte6)
 {
     this.scene.start("House");
     porte = 'Porte6' ;
 }
-function EntrerP8(player,porte7)
+function EntrerP7(player,porte7)
 {
     this.scene.start("House");
     porte = 'Porte7' ;
+}
+function EntrerP8(player,porte8)
+{
+    this.scene.start("House");
+    porte = 'Porte8' ;
 }
