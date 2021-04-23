@@ -29,7 +29,7 @@ class Scene3 extends Phaser.Scene {
       this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
       this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
-      this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
+      //this.load.atlas("atlas", "assets/atlas/atlas.png", "../assets/atlas/atlas.json");
       //this.load.spritesheet('atlas', 'assets/atlas/Perso/Perso.png', { frameWidth:24, frameHeight: 20,});
 
     
