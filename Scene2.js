@@ -11,7 +11,7 @@ var lifetext;
 var gameOver;
 var shoots;
 var shoot;
-var arrow = 100 ;
+var arrow = 10 ;
 var cursors2;
 var direction = 'up';
 var itemlife;
@@ -229,7 +229,7 @@ class Scene2 extends Phaser.Scene{
             .setDepth(12)
             .setScrollFactor(0);
 
-        this.add.text(16, 75, "Munitions: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+        this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
             .setScrollFactor(0);
 
