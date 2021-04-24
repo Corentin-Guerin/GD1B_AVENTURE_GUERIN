@@ -244,7 +244,7 @@
          "name":"Below Player",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":70,
          "x":0,
          "y":0
@@ -256,7 +256,7 @@
          "name":"Below PlayerTwo",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":70,
          "x":0,
          "y":0
@@ -268,7 +268,7 @@
          "name":"World",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":70,
          "x":0,
          "y":0
@@ -280,7 +280,7 @@
          "name":"Above Player",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":70,
          "x":0,
          "y":0
@@ -313,6 +313,30 @@
                  "width":0,
                  "x":367.996666666667,
                  "y":1891.33336666667
+                }, 
+                {
+                 "height":0,
+                 "id":422,
+                 "name":"Arc",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":144,
+                 "y":1429.5
+                }, 
+                {
+                 "height":0,
+                 "id":423,
+                 "name":"Epee",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":95,
+                 "y":2082
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -934,7 +958,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":422,
+ "nextobjectid":424,
  "orientation":"orthogonal",
  "properties":[
         {

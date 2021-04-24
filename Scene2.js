@@ -28,7 +28,7 @@ var lifetext;
 var gameOver;
 var shoots;
 var shoot;
-var arrow = 10 ;
+var arrow = 0 ;
 var cursors2;
 var direction = 'up';
 var itemlife;
@@ -37,11 +37,18 @@ var itemlifes;
 var itemarrows;
 var porte;
 var getcle = false ;
+var itemarc;
+var getarc = false ;
+var itemepee;
+var getepee = false;
+var coupepee;
+var coups;
+var charge = 0 ;
+
 
 class Scene2 extends Phaser.Scene{
     constructor(){
       super("playGame");
-     
       
     }
   
@@ -60,10 +67,10 @@ class Scene2 extends Phaser.Scene{
         const map = this.make.tilemap({ key: "map" });
         const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
 
-        const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
-        const belowLayer2 = map.createStaticLayer("Below PlayerTwo", tileset, 0, 0);
-        const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
-        const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
+        const belowLayer = map.createLayer("Below Player", tileset, 0, 0);
+        const belowLayer2 = map.createLayer("Below PlayerTwo", tileset, 0, 0);
+        const worldLayer = map.createLayer("World", tileset, 0, 0);
+        const aboveLayer = map.createLayer("Above Player", tileset, 0, 0);
 
       
         worldLayer.setCollisionByProperty({ collides: true });
@@ -233,14 +240,28 @@ class Scene2 extends Phaser.Scene{
 
 
 
+        if(getarc === false){
+            const creatarc = map.findObject("Objects", obj => obj.name === "Arc");
+            itemarc = this.physics.add.sprite(creatarc.x, creatarc.y,"arc")
+            .setSize(32, 32,)
+  
+        }
+        if(getepee === false){
+            const createpee = map.findObject("Objects", obj => obj.name === "Epee");
+            itemepee = this.physics.add.sprite(createpee.x, createpee.y,"epee")
+            .setSize(32, 32,)
+  
+        }
+
+        this.physics.add.collider(player, itemarc,takearc, null, this);
+        this.physics.add.collider(player, itemepee,takeepee, null, this);
 
         shoots = this.physics.add.group();
+        coups = this.physics.add.group();
         itemarrows = this.physics.add.group();
         itemlifes = this.physics.add.group();
 
         this.physics.add.collider(player, worldLayer);
-        this.physics.add.collider(player, enemies1);   
-        this.physics.add.collider(player, enemies2);      
         this.physics.add.collider(enemies1, worldLayer);
         this.physics.add.collider(enemies2, worldLayer);
         /*this.physics.add.collider(enemies1, enemies2);
@@ -249,10 +270,16 @@ class Scene2 extends Phaser.Scene{
 
         this.physics.world.addCollider(player, enemies1, hitplayer, null, this);
         this.physics.world.addCollider(player, enemies2, hitplayer, null, this);
+        this.physics.world.addCollider(enemies1, player, hitplayer, null, this);
+        this.physics.world.addCollider(enemies2, player, hitplayer, null, this);
 
         this.physics.add.collider(shoots, worldLayer,hitwalls, null, this);
         this.physics.add.overlap(enemies1, shoots,hitenemies, null, this);
         this.physics.add.overlap(enemies2, shoots,hitenemies, null, this);
+
+      
+        this.physics.add.overlap(enemies1, coups,hitenemies, null, this);
+        this.physics.add.overlap(enemies2, coups,hitenemies, null, this);
 
         this.physics.add.overlap(player, itemarrows,addarrow, null, this);
         this.physics.add.overlap(player, itemlifes,addlife, null, this);
@@ -421,15 +448,20 @@ class Scene2 extends Phaser.Scene{
            
         }  
         
+        if(charge != 0){
+            charge -- ;
+        }
+        
 
         const JustDownA = Phaser.Input.Keyboard.JustDown(cursors2.A)       
     
-        if (JustDownA && arrow >0 )
+        if (JustDownA && arrow >0 && getarc===true && charge === 0 )
         {
             shoot = shoots.create(player.x,player.y+16,'shoot');
             shoot.body.allowGravity = false;
             shoot.allowGravity = false;
             arrow-- ;
+            charge = 30;
     
             if(direction == 'left'){
                 shoot.setVelocityX(550);
@@ -447,11 +479,45 @@ class Scene2 extends Phaser.Scene{
                 shoot.setVelocityY(550);
                 shoot.setFlipX(true);
             }
-           
+        }
+
+        const JustDownspace = Phaser.Input.Keyboard.JustDown(cursors2.space)       
+        
+        if (JustDownspace && getepee===true && charge === 0  )
+        {
+            
+    
+            if(direction == 'left'){
+                coupepee = coups.create(player.x+30,player.y+16,'epee');
+                coupepee.body.allowGravity = false;
+                coupepee.allowGravity = false;
+                setTimeout(function(){coupepee.destroy()}, 100);
+                charge = 50;
+            }
+            else if(direction == 'right') {
+                coupepee = coups.create(player.x-30,player.y+16,'epee');
+                coupepee.body.allowGravity = false;
+                coupepee.allowGravity = false;
+                setTimeout(function(){coupepee.destroy()}, 100);
+                charge = 50;
+            }
+            else if(direction == 'down'){
+                coupepee = coups.create(player.x,player.y-20,'epee');
+                coupepee.body.allowGravity = false;
+                coupepee.allowGravity = false;
+                setTimeout(function(){coupepee.destroy()}, 100);
+                charge = 50;
+            }
+            else if (direction == 'up'){
+                coupepee = coups.create(player.x,player.y+50,'epee');
+                coupepee.body.allowGravity = false;
+                coupepee.allowGravity = false;
+                setTimeout(function(){coupepee.destroy()}, 100);
+                charge = 50;
+            }
         }
 
     }
-    
 }
 function hitplayer (){
     if (invincible === false)
@@ -537,4 +603,29 @@ function EntrerP8(player,porte8)
 {
     this.scene.start("House");
     porte = 'Porte8' ;
+}
+
+function takearc(player,itemarc)
+{
+    itemarc.destroy();
+    arrow = arrow +10 ;
+    getarc = true ;
+    const textarc = this.add.text(400, 60, "Vous avez trouvé : Arc  ->  *** Press A pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+    .setDepth(12)
+    .setScrollFactor(0);
+    
+    setTimeout(function(){textarc.destroy()}, 2000);
+
+}
+function takeepee(player,itemepee)
+{
+    itemepee.destroy();
+    getepee = true ;
+
+    const textepee = this.add.text(400, 60, "Vous avez trouvé : Epee  ->  *** Press ESPACE pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+            .setDepth(12)
+            .setScrollFactor(0);
+    
+    setTimeout(function(){textepee.destroy()}, 2000);
+
 }

@@ -30,7 +30,6 @@ class Scene3 extends Phaser.Scene {
       this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
       this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
-      
       this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
     
     }
@@ -41,8 +40,10 @@ class Scene3 extends Phaser.Scene {
       const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
       
       const wallHouse = map.createStaticLayer("Wall", tileset, 0, 0) .setDepth(5);
+
       map.createStaticLayer("BelowHouse", tileset, 0, 0);
-     
+    
+
       wallHouse.setCollisionByProperty({ collides: true });
 
 
@@ -161,14 +162,14 @@ class Scene3 extends Phaser.Scene {
       this.physics.add.collider(player, itemcle,takecle, null, this);
 
 
-      this.physics.add.collider(player, sorPorte1,SortiP1, null, this);
-      this.physics.add.collider(player, sorPorte2,SortiP2, null, this);
-      this.physics.add.collider(player, sorPorte3,SortiP3, null, this);
-      this.physics.add.collider(player, sorPorte4,SortiP4, null, this);
-      this.physics.add.collider(player, sorPorte5,SortiP5, null, this);
-      this.physics.add.collider(player, sorPorte6,SortiP6, null, this);
-      this.physics.add.collider(player, sorPorte7,SortiP7, null, this);
-      this.physics.add.collider(player, sorPorte8,SortiP8, null, this);
+      this.physics.add.overlap(player, sorPorte1,SortiP1, null, this);
+      this.physics.add.overlap(player, sorPorte2,SortiP2, null, this);
+      this.physics.add.overlap(player, sorPorte3,SortiP3, null, this);
+      this.physics.add.overlap(player, sorPorte4,SortiP4, null, this);
+      this.physics.add.overlap(player, sorPorte5,SortiP5, null, this);
+      this.physics.add.overlap(player, sorPorte6,SortiP6, null, this);
+      this.physics.add.overlap(player, sorPorte7,SortiP7, null, this);
+      this.physics.add.overlap(player, sorPorte8,SortiP8, null, this);
 
 
 
@@ -300,4 +301,10 @@ function takecle(player,itemcle)
 {
     itemcle.destroy();
     getcle = true ;
+
+    const textcle = this.add.text(300, 60, "Vous avez trouvé : Clé  ->  *** Peut-etre utilisé pour ouvrir une serrure  *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+    .setDepth(12)
+    .setScrollFactor(0);
+    
+    setTimeout(function(){textcle.destroy()}, 2000);
 }
