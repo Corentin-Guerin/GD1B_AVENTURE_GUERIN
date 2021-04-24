@@ -14,8 +14,9 @@ var sorPorte5;
 var sorPorte6;
 var sorPorte7;
 var sorPorte8;
-
 var portesorti;
+var itemcle;
+
 
 
 
@@ -111,7 +112,6 @@ class Scene3 extends Phaser.Scene {
       //camera.setBounds(0, 0, player.widthInPixels, player.heightInPixels);
       
       //porte sorti
-
       const sortiePorte1 = map.findObject("PorteInt", obj => obj.name === "IntPorte1");
         sorPorte1 = this.physics.add.sprite(sortiePorte1.x, sortiePorte1.y)
         .setSize(32, 32,)
@@ -143,6 +143,23 @@ class Scene3 extends Phaser.Scene {
       const sortiePorte8 = map.findObject("PorteInt", obj => obj.name === "IntPorte8");
         sorPorte8 = this.physics.add.sprite(sortiePorte8.x, sortiePorte8.y)
         .setSize(32, 32,)
+
+
+      //clé
+
+      if(getcle === false){
+          const cle = map.findObject("Objects", obj => obj.name === "cle");
+          itemcle = this.physics.add.sprite(cle.x, cle.y,"cle")
+          .setSize(32, 32,)
+
+      }
+      
+        
+    
+      
+
+      this.physics.add.collider(player, itemcle,takecle, null, this);
+
 
       this.physics.add.collider(player, sorPorte1,SortiP1, null, this);
       this.physics.add.collider(player, sorPorte2,SortiP2, null, this);
@@ -278,4 +295,9 @@ function SortiP8(player,porte)
 {
     this.scene.start("playGame");
     portesorti = 'SorPorte8' ;
+}
+function takecle(player,itemcle)
+{
+    itemcle.destroy();
+    getcle = true ;
 }

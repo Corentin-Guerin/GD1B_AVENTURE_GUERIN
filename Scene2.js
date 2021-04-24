@@ -22,7 +22,7 @@ var enemies1;
 var enemie2;
 var enemies2;
 var invincible = false ;
-var compteur = 60;
+var compteur = 60 ;
 var life = 3 ;
 var lifetext;   
 var gameOver;
@@ -36,6 +36,7 @@ var itemarrow;
 var itemlifes;
 var itemarrows;
 var porte;
+var getcle = false ;
 
 class Scene2 extends Phaser.Scene{
     constructor(){
@@ -50,7 +51,7 @@ class Scene2 extends Phaser.Scene{
         this.load.image("tiles", "assets/tilesets/tuxmon-sample-32px-extruded.png");
         this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
-        this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
+        this.load.spritesheet("player", 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
        
     }
 
@@ -188,6 +189,7 @@ class Scene2 extends Phaser.Scene{
         const Porte1 = map.findObject("PortesExt", obj => obj.name === "Porte1");
         entPorte1 = this.physics.add.sprite(Porte1.x, Porte1.y)
         .setSize(32, 32,)
+       
         
         const Porte2 = map.findObject("PortesExt", obj => obj.name === "Porte2");
         entPorte2 = this.physics.add.sprite(Porte2.x, Porte2.y)
@@ -196,6 +198,7 @@ class Scene2 extends Phaser.Scene{
         const Porte3 = map.findObject("PortesExt", obj => obj.name === "Porte3");
         entPorte3 = this.physics.add.sprite(Porte3.x, Porte3.y)
         .setSize(32, 32,)
+      
 
         const Porte4 = map.findObject("PortesExt", obj => obj.name === "Porte4");
         entPorte4= this.physics.add.sprite(Porte4.x, Porte4.y)
@@ -219,14 +222,14 @@ class Scene2 extends Phaser.Scene{
 
 
 
-        this.physics.add.collider(player, entPorte1,EntrerP1, null, this);
-        this.physics.add.collider(player, entPorte2,EntrerP2, null, this);
-        this.physics.add.collider(player, entPorte3,EntrerP3, null, this);
-        this.physics.add.collider(player, entPorte4,EntrerP4, null, this);
-        this.physics.add.collider(player, entPorte5,EntrerP5, null, this);
-        this.physics.add.collider(player, entPorte6,EntrerP6, null, this);
-        this.physics.add.collider(player, entPorte7,EntrerP7, null, this);
-        this.physics.add.collider(player, entPorte8,EntrerP8, null, this);
+        this.physics.add.overlap(player, entPorte1,EntrerP1, null, this);
+        this.physics.add.overlap(player, entPorte2,EntrerP2, null, this);
+        this.physics.add.overlap(player, entPorte3,EntrerP3, null, this);
+        this.physics.add.overlap(player, entPorte4,EntrerP4, null, this);
+        this.physics.add.overlap(player, entPorte5,EntrerP5, null, this);
+        this.physics.add.overlap(player, entPorte6,EntrerP6, null, this);
+        this.physics.add.overlap(player, entPorte7,EntrerP7, null, this);
+        this.physics.add.overlap(player, entPorte8,EntrerP8, null, this);
 
 
 
@@ -505,8 +508,10 @@ function EntrerP2(player,porte2)
 }
 function EntrerP3(player,porte3)
 {
-    this.scene.start("House");
-    porte = 'Porte3' ;
+    if (getcle == true){
+        this.scene.start("House");
+        porte = 'Porte3' ;
+    }
 }
 function EntrerP4(player,porte4)
 {
