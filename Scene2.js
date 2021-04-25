@@ -373,6 +373,8 @@ class Scene2 extends Phaser.Scene{
             }
         }
         
+        //info inventaire
+
         this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
             .setScrollFactor(0);
@@ -380,7 +382,25 @@ class Scene2 extends Phaser.Scene{
         this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
             .setScrollFactor(0);
+        
+        if(getepee === true){
+            this.add.text(16, 120, "Epée", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+                .setDepth(12)
+                .setScrollFactor(0);
+        } 
+        
+        if(getarc === true){
+            this.add.text(80, 120, "Arc", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+                .setDepth(12)
+                .setScrollFactor(0);
+        }
+        if(getcle === true){
+            this.add.text(135, 120, "Cle", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+                .setDepth(12)
+                .setScrollFactor(0);
+        }
 
+        //frame invulnérable
         if(invincible == true){
             compteur-- ;
             if(compteur == 0){
@@ -389,6 +409,8 @@ class Scene2 extends Phaser.Scene{
                 invincible = false ;
             }
         }
+        
+        //gestion vie
         if (life === 0){
             
             this.physics.pause();
@@ -406,9 +428,15 @@ class Scene2 extends Phaser.Scene{
             gameOver = true;
         }
 
+        //fin du jeu
         if (gameOver)
         {
             return;
+        }
+
+        //cd attaque 
+        if(charge != 0){
+            charge -- ;
         }
 
         const speed = 175;
@@ -460,10 +488,6 @@ class Scene2 extends Phaser.Scene{
           
            
         }  
-        
-        if(charge != 0){
-            charge -- ;
-        }
         
 
         const JustDownA = Phaser.Input.Keyboard.JustDown(cursors2.A)       

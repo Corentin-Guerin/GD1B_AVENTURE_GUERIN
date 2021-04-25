@@ -155,7 +155,7 @@ class Scene3 extends Phaser.Scene {
 
       }
       
-        
+      
     
       
 
@@ -170,8 +170,6 @@ class Scene3 extends Phaser.Scene {
       this.physics.add.overlap(player, sorPorte6,SortiP6, null, this);
       this.physics.add.overlap(player, sorPorte7,SortiP7, null, this);
       this.physics.add.overlap(player, sorPorte8,SortiP8, null, this);
-
-
 
 
       this.physics.add.collider(player, wallHouse);
@@ -216,6 +214,31 @@ class Scene3 extends Phaser.Scene {
     }
 
     update (){
+      
+      this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+            .setDepth(12)
+            .setScrollFactor(0);
+
+      this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+            .setDepth(12)
+            .setScrollFactor(0);
+     
+      if(getepee === true){
+        this.add.text(16, 120, "Epée", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+          .setDepth(12)
+          .setScrollFactor(0);
+      } 
+      
+      if(getarc === true){
+        this.add.text(80, 120, "Arc", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+          .setDepth(12)
+          .setScrollFactor(0);
+      }
+      if(getcle === true){
+        this.add.text(135, 120, "Cle", {font: "18px monospace",fill: "#000000",padding: { x: 10, y: 5 },backgroundColor: "#ffffff"})
+          .setDepth(12)
+          .setScrollFactor(0);
+      }
 
 
       const speed = 175;
