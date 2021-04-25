@@ -178,6 +178,16 @@ class Scene3 extends Phaser.Scene {
 
       cursors = this.input.keyboard.createCursorKeys();
 
+      if (this.input.gamepad.total === 0){
+        this.input.gamepad.once('connected', function (pad, button, index) {
+            paddle = pad;
+            padConnected = true;
+        }); 
+      }
+      else {
+        paddle = this.input.gamepad.pad1;
+      }
+
       const anims = this.anims;
 
         anims.create({
@@ -252,9 +262,27 @@ class Scene3 extends Phaser.Scene {
         else if (prevVelocity.x > 0) player.setTexture('player');
         else if (prevVelocity.y < 0) player.setTexture('player');
         else if (prevVelocity.y > 0) player.setTexture('player');
-      
-        
       }  
+
+      if(padConnected){
+
+        if (paddle.left) {
+            player.body.setVelocityX(-speed);
+            direction = 'right' ;
+        } else if (paddle.right) {
+            player.body.setVelocityX(speed);
+            direction = 'left' ;
+        }
+
+        // Vertical movement
+        if (paddle.up) {
+            player.body.setVelocityY(-speed);
+            direction = 'down' ;
+        } else if (paddle.down) {
+            player.body.setVelocityY(speed);
+            direction = 'up' ;
+        }
+      }
     }
 }
 function SortiP1(player,porte)

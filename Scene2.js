@@ -44,6 +44,12 @@ var getepee = false;
 var coupepee;
 var coups;
 var charge = 0 ;
+var sprite;
+
+var gamepad;
+var paddle;
+var padConnected;
+var pad; 
 
 
 class Scene2 extends Phaser.Scene{
@@ -286,7 +292,16 @@ class Scene2 extends Phaser.Scene{
         cursors = this.input.keyboard.createCursorKeys();
         cursors2 = this.input.keyboard.addKeys('A,Z,S,Q,D,T,space');
         
-        
+        if (this.input.gamepad.total === 0){
+            this.input.gamepad.once('connected', function (pad, button, index) {
+                paddle = pad;
+                padConnected = true;
+            }); 
+        }
+        else {
+            paddle = this.input.gamepad.pad1;
+        }
+
         const anims = this.anims;
 
         anims.create({
@@ -513,6 +528,125 @@ class Scene2 extends Phaser.Scene{
                 setTimeout(function(){coupepee.destroy()}, 100);
                 charge = 35;
             }
+            if (cursors.left.isDown) {
+                player.anims.play("left", true);
+            } else if (cursors.right.isDown) {
+                player.anims.play("right", true);
+            } else if (cursors.up.isDown) {
+                player.anims.play("up", true);
+            } else if (cursors.down.isDown) {
+                player.anims.play("down", true);
+            } else {
+                player.anims.stop();
+                // If we were moving, pick and idle frame to use
+                
+                if (prevVelocity.x < 0) player.setTexture('player');
+                else if (prevVelocity.x > 0) player.setTexture('player');
+                else if (prevVelocity.y < 0) player.setTexture('player');
+                else if (prevVelocity.y > 0) player.setTexture('player');
+              
+               
+            }  
+        }
+
+        
+
+        if(padConnected){
+
+            if (paddle.left) {
+                player.body.setVelocityX(-speed);
+                direction = 'right' ;
+            } else if (paddle.right) {
+                player.body.setVelocityX(speed);
+                direction = 'left' ;
+            }
+    
+            // Vertical movement
+            if (paddle.up) {
+                player.body.setVelocityY(-speed);
+                direction = 'down' ;
+            } else if (paddle.down) {
+                player.body.setVelocityY(speed);
+                direction = 'up' ;
+            }
+            
+         
+            
+            if (paddle.B && arrow >0 && getarc===true && charge === 0 )
+            {
+                shoot = shoots.create(player.x,player.y+16,'shoot');
+                shoot.body.allowGravity = false;
+                shoot.allowGravity = false;
+                arrow-- ;
+                charge = 30;
+        
+                if(direction == 'left'){
+                    shoot.setVelocityX(550);
+                    shoot.setFlipX(false);
+                }
+                else if(direction == 'right') {
+                    shoot.setVelocityX(-550);
+                    shoot.setFlipX(false);
+                }
+                else if(direction == 'down'){
+                    shoot.setVelocityY(-550);
+                    shoot.setFlipX(false);
+                }
+                else if (direction == 'up'){
+                    shoot.setVelocityY(550);
+                    shoot.setFlipX(true);
+                }
+            }
+            if (paddle.A && getepee===true && charge === 0  )
+            {
+                if(direction == 'left'){
+                    coupepee = coups.create(player.x+30,player.y+16,'epee');
+                    coupepee.body.allowGravity = false;
+                    coupepee.allowGravity = false;
+                    setTimeout(function(){coupepee.destroy()}, 100);
+                    charge = 35;
+                }
+                else if(direction == 'right') {
+                    coupepee = coups.create(player.x-30,player.y+16,'epee');
+                    coupepee.body.allowGravity = false;
+                    coupepee.allowGravity = false;
+                    setTimeout(function(){coupepee.destroy()}, 100);
+                    charge = 35;
+                }
+                else if(direction == 'down'){
+                    coupepee = coups.create(player.x,player.y-20,'epee');
+                    coupepee.body.allowGravity = false;
+                    coupepee.allowGravity = false;
+                    setTimeout(function(){coupepee.destroy()}, 100);
+                    charge = 35;
+                }
+                else if (direction == 'up'){
+                    coupepee = coups.create(player.x,player.y+50,'epee');
+                    coupepee.body.allowGravity = false;
+                    coupepee.allowGravity = false;
+                    setTimeout(function(){coupepee.destroy()}, 100);
+                    charge = 35;
+                }
+                if (paddle.left) {
+                    player.anims.play("left", true);
+                } else if (paddle.right) {
+                    player.anims.play("right", true);
+                } else if (paddle.up) {
+                    player.anims.play("up", true);
+                } else if (paddle.down) {
+                    player.anims.play("down", true);
+                } else {
+                    player.anims.stop();
+                    // If we were moving, pick and idle frame to use
+                    
+                    if (prevVelocity.x < 0) player.setTexture('player');
+                    else if (prevVelocity.x > 0) player.setTexture('player');
+                    else if (prevVelocity.y < 0) player.setTexture('player');
+                    else if (prevVelocity.y > 0) player.setTexture('player');
+                
+                
+                }  
+            }
         }
 
     }
@@ -611,7 +745,7 @@ function takearc(player,itemarc)
     arrow = arrow +10 ;
     getarc = true ;
     
-    const textarc = this.add.text(400, 60, "Vous avez trouvé : Arc  ->  *** Press A pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+    const textarc = this.add.text(400, 60, "Vous avez trouvé : Arc -> ** Press A / O pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
     .setDepth(12)
     .setScrollFactor(0);
     
@@ -623,7 +757,7 @@ function takeepee(player,itemepee)
     itemepee.destroy();
     getepee = true ;
 
-    const textepee = this.add.text(400, 60, "Vous avez trouvé : Epee  ->  *** Press ESPACE pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+    const textepee = this.add.text(400, 60, "Vous avez trouvé : Epee -> ** Press ESPACE / X  pour utiliser ** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
             .setScrollFactor(0);
     
