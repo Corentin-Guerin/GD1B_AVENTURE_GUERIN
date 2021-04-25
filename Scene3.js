@@ -39,9 +39,9 @@ class Scene3 extends Phaser.Scene {
       const map = this.make.tilemap({ key: "map" });
       const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
       
-      const wallHouse = map.createStaticLayer("Wall", tileset, 0, 0) .setDepth(5);
+      const wallHouse = map.createLayer("Wall", tileset, 0, 0) .setDepth(5);
 
-      map.createStaticLayer("BelowHouse", tileset, 0, 0);
+      map.createLayer("BelowHouse", tileset, 0, 0);
     
 
       wallHouse.setCollisionByProperty({ collides: true });
