@@ -161,7 +161,6 @@ class Scene2 extends Phaser.Scene{
         }); 
 
         for (const enemie1 of enemieObjects) {
-        //enemies.create(enemie.x, enemie.y, 'Enemie1')
         enemies1.create(enemie1.x, enemie1.y, 'Enemie1')
             
             .setDepth(1)
@@ -179,7 +178,6 @@ class Scene2 extends Phaser.Scene{
             }); 
 
             for (const enemie2 of enemieObjects2) {
-            //enemies.create(enemie.x, enemie.y, 'Enemie1')
             enemies2.create(enemie2.x, enemie2.y, 'Enemie2')
                 .setDepth(1)
                 .setScale(1)
@@ -492,28 +490,28 @@ class Scene2 extends Phaser.Scene{
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
-                charge = 50;
+                charge = 35;
             }
             else if(direction == 'right') {
                 coupepee = coups.create(player.x-30,player.y+16,'epee');
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
-                charge = 50;
+                charge = 35;
             }
             else if(direction == 'down'){
                 coupepee = coups.create(player.x,player.y-20,'epee');
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
-                charge = 50;
+                charge = 35;
             }
             else if (direction == 'up'){
                 coupepee = coups.create(player.x,player.y+50,'epee');
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
-                charge = 50;
+                charge = 35;
             }
         }
 
@@ -562,10 +560,12 @@ function addlife(player, itemlife)
         life = life + 1 ; 
     }
 }
+
 function EntrerP1(player,porte1)
 {
     this.scene.start("House");
     porte = 'Porte1' ;
+    this.cameras.main.fade(250, 0, 0, 0);
 }
 function EntrerP2(player,porte2)
 {
@@ -610,6 +610,7 @@ function takearc(player,itemarc)
     itemarc.destroy();
     arrow = arrow +10 ;
     getarc = true ;
+    
     const textarc = this.add.text(400, 60, "Vous avez trouvé : Arc  ->  *** Press A pour utiliser *** " , {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
     .setDepth(12)
     .setScrollFactor(0);
