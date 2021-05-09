@@ -31,6 +31,12 @@ class Scene3 extends Phaser.Scene {
       this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
       this.load.spritesheet('player', 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
+      this.load.spritesheet('cle', 'assets/Cle.png', { frameWidth:32, frameHeight: 64,});
+      
+      this.load.image('Vie0', 'assets/Vie0.png');
+      this.load.image('Vie1', 'assets/Vie1.png');
+      this.load.image('Vie2', 'assets/Vie2.png');
+      this.load.image('Vie3', 'assets/Vie3.png');
     
     }
 
@@ -239,6 +245,51 @@ class Scene3 extends Phaser.Scene {
           .setDepth(12)
           .setScrollFactor(0);
       }
+
+
+      Vie3 = this.add.image(75, 35,'Vie3') 
+      .setDepth(0)
+      .setScrollFactor(0);
+
+      Vie2 =this.add.image(75, 35,'Vie2') 
+          .setDepth(0)
+          .setScrollFactor(0);
+
+      Vie1 =this.add.image(75, 35,'Vie1') 
+          .setDepth(0)
+          .setScrollFactor(0);
+      
+      Vie0 =this.add.image(75, 35,'Vie0') 
+          .setDepth(0)
+          .setScrollFactor(0);
+
+
+      if(life === 3)
+      {
+          Vie3.setDepth(1);
+          Vie2.setDepth(0);
+          Vie1.setDepth(0);
+          Vie0.setDepth(0);
+      }
+      
+      if (life === 2){
+
+          Vie3.setDepth(0);
+          Vie2.setDepth(1);
+          Vie1.setDepth(0);
+          Vie0.setDepth(0);
+      }
+      
+      if(life === 1){
+      
+          Vie3.setDepth(0);
+          Vie2.setDepth(0);
+          Vie1.setDepth(1);
+          Vie0.setDepth(0);
+      
+      }
+
+
 
 
       const speed = 175;

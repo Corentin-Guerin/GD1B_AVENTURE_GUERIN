@@ -51,6 +51,12 @@ var paddle;
 var padConnected;
 var pad; 
 
+var Vie3;
+var Vie2;
+var Vie0;
+var Vie1;
+
+
 
 class Scene2 extends Phaser.Scene{
     constructor(){
@@ -65,7 +71,25 @@ class Scene2 extends Phaser.Scene{
         this.load.tilemapTiledJSON("map", "assets/tilemaps/tuxemon-town.json");
 
         this.load.spritesheet("player", 'assets/Perso.png', { frameWidth:32, frameHeight: 64,});
-       
+        this.load.spritesheet("Arc", 'assets/Arc.png', { frameWidth:32, frameHeight: 32,});
+        this.load.spritesheet("Epee", 'assets/Epee.png', { frameWidth:32, frameHeight: 32,});
+        this.load.spritesheet("CoupEpee", 'assets/CoupEpee.png', { frameWidth:32, frameHeight: 32,});
+        this.load.spritesheet("shoot", 'assets/Fleche.png', { frameWidth:32, frameHeight: 32,});
+        this.load.spritesheet("shoot2", 'assets/Fleche2.png', { frameWidth:32, frameHeight: 32,});
+        this.load.spritesheet("Enemie1", 'assets/enemie1.png', { frameWidth:32, frameHeight: 64,});
+        this.load.spritesheet("Enemie2", 'assets/enemie2.png', { frameWidth:64, frameHeight: 32,});
+        this.load.spritesheet("Persoup", 'assets/Persoup.png', { frameWidth:32, frameHeight: 64,});
+        this.load.spritesheet("Persodown", 'assets/Persodown.png', { frameWidth:32, frameHeight: 64,});
+        this.load.spritesheet("Persoleft", 'assets/Persoleft.png', { frameWidth:32, frameHeight: 64,});
+        this.load.spritesheet("Persoright", 'assets/Persoright.png', { frameWidth:32, frameHeight: 64,});
+        
+        this.load.spritesheet("itemlife", 'assets/itemlife.png', { frameWidth:16, frameHeight: 16,});
+        this.load.spritesheet("itemarrow", 'assets/itemarrow.png', { frameWidth:32, frameHeight: 32,});
+
+        this.load.image('Vie0', 'assets/Vie0.png');
+        this.load.image('Vie1', 'assets/Vie1.png');
+        this.load.image('Vie2', 'assets/Vie2.png');
+        this.load.image('Vie3', 'assets/Vie3.png');
     }
 
     create(){
@@ -101,55 +125,63 @@ class Scene2 extends Phaser.Scene{
         if(portesorti == 'SorPorte1'){
             player = this.physics.add
                 .sprite(SortiePorte1.x, SortiePorte1.y,  'player')
-               
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte2'){
             player = this.physics.add
                 .sprite(SortiePorte2.x, SortiePorte2.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte3'){
             player = this.physics.add
                 .sprite(SortiePorte3.x, SortiePorte3.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte4'){
             player = this.physics.add
                 .sprite(SortiePorte4.x, SortiePorte4.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte5'){
             player = this.physics.add
                 .sprite(SortiePorte5.x, SortiePorte5.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte6'){
             player = this.physics.add
                 .sprite(SortiePorte6.x, SortiePorte6.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte7'){
             player = this.physics.add
                 .sprite(SortiePorte7.x, SortiePorte7.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else if(portesorti == 'SorPorte8'){
             player = this.physics.add
                 .sprite(SortiePorte8.x, SortiePorte8.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
           }
         else {
             player = this.physics.add
                 .sprite(spawnPoint.x, spawnPoint.y,  'player')
+                .setDepth(1)
                 .setSize(32, 32,)
                 .setOffset(0, 32);
         }
@@ -246,13 +278,13 @@ class Scene2 extends Phaser.Scene{
 
         if(getarc === false){
             const creatarc = map.findObject("Objects", obj => obj.name === "Arc");
-            itemarc = this.physics.add.sprite(creatarc.x, creatarc.y,"arc")
+            itemarc = this.physics.add.sprite(creatarc.x, creatarc.y,"Arc")
             .setSize(32, 32,)
   
         }
         if(getepee === false){
             const createpee = map.findObject("Objects", obj => obj.name === "Epee");
-            itemepee = this.physics.add.sprite(createpee.x, createpee.y,"epee")
+            itemepee = this.physics.add.sprite(createpee.x, createpee.y,"Epee")
             .setSize(32, 32,)
   
         }
@@ -328,6 +360,24 @@ class Scene2 extends Phaser.Scene{
             frameRate: 5,
         });
 
+        anims.create({
+            key: 'enemiedown',
+            frames: this.anims.generateFrameNumbers('Enemie1', { start: 0, end: 3 }),
+            frameRate: 5,
+        });
+
+        anims.create({
+            key: 'enemieup',
+            frames: this.anims.generateFrameNumbers('Enemie1', { start: 4, end: 7 }),
+            frameRate: 5,
+        });
+
+        anims.create({
+            key: 'enemie2',
+            frames: this.anims.generateFrameNumbers('Enemie2', { start: 0, end: 3 }),
+            frameRate: 5,
+        });
+
     }
 
     update (){
@@ -335,6 +385,7 @@ class Scene2 extends Phaser.Scene{
         for (const enemie1 of enemies1.children.entries) {
             if (enemie1.body.blocked.up) {
                 enemie1.direction = 'UP';
+                
             }
     
             if (enemie1.body.blocked.down) {
@@ -344,10 +395,13 @@ class Scene2 extends Phaser.Scene{
             if (enemie1.direction === 'UP') {
                 enemie1.setVelocityY(100);
                 enemie1.setFlipX(false);
+                enemie1.anims.play("enemieup", true);
                 
             } else {
                 enemie1.setVelocityY(-100);
                 enemie1.setFlipX(true);
+                
+                enemie1.anims.play("enemiedown", true);
                
             }
            
@@ -364,20 +418,22 @@ class Scene2 extends Phaser.Scene{
     
             if (enemie2.direction === 'RIGHT') {
                 enemie2.setVelocityX(100);
-                enemie2.setFlipX(false);
+                enemie2.setFlipX(true);
+                enemie2.anims.play("enemie2", true);
                 
             } else {
                 enemie2.setVelocityX(-100);
-                enemie2.setFlipX(true);
+                enemie2.setFlipX(false);
+                enemie2.anims.play("enemie2", true);
                 
             }
         }
         
         //info inventaire
 
-        this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+      /*  this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
-            .setScrollFactor(0);
+            .setScrollFactor(0);*/
 
         this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
@@ -411,8 +467,58 @@ class Scene2 extends Phaser.Scene{
         }
         
         //gestion vie
+
+        Vie3 = this.add.image(75, 35,'Vie3') 
+        .setDepth(0)
+        .setScrollFactor(0);
+
+        Vie2 = this.add.image(75, 35,'Vie2') 
+            .setDepth(0)
+            .setScrollFactor(0);
+
+        Vie1 = this.add.image(75, 35,'Vie1') 
+            .setDepth(0)
+            .setScrollFactor(0);
+        
+        Vie0 = this.add.image(75, 35,'Vie0') 
+            .setDepth(0)
+            .setScrollFactor(0);
+
+
+        if(life === 3)
+        {
+            Vie3.setDepth(1);
+            Vie2.setDepth(0);
+            Vie1.setDepth(0);
+            Vie0.setDepth(0);
+        }
+        
+        if (life === 2){
+
+            Vie3.setDepth(0);
+            Vie2.setDepth(1);
+            Vie1.setDepth(0);
+            Vie0.setDepth(0);
+        }
+        
+        if(life === 1){
+        
+            Vie3.setDepth(0);
+            Vie2.setDepth(0);
+            Vie1.setDepth(1);
+            Vie0.setDepth(0);
+        
+        }
+
+
+
         if (life === 0){
             
+            Vie3.setDepth(0);
+            Vie2.setDepth(0);
+            Vie1.setDepth(0);
+            Vie0.setDepth(1);
+
             this.physics.pause();
             player.setTint(0xff0000);
             this.add
@@ -427,6 +533,7 @@ class Scene2 extends Phaser.Scene{
 
             gameOver = true;
         }
+
 
         //fin du jeu
         if (gameOver)
@@ -481,10 +588,10 @@ class Scene2 extends Phaser.Scene{
             player.anims.stop();
             // If we were moving, pick and idle frame to use
             
-            if (prevVelocity.x < 0) player.setTexture('player');
-            else if (prevVelocity.x > 0) player.setTexture('player');
-            else if (prevVelocity.y < 0) player.setTexture('player');
-            else if (prevVelocity.y > 0) player.setTexture('player');
+            if (prevVelocity.x < 0) player.setTexture('Persoleft');
+            else if (prevVelocity.x > 0) player.setTexture('Persoright');
+            else if (prevVelocity.y < 0) player.setTexture('Persoup');
+            else if (prevVelocity.y > 0) player.setTexture('Persodown');
           
            
         }  
@@ -494,27 +601,44 @@ class Scene2 extends Phaser.Scene{
     
         if (JustDownA && arrow >0 && getarc===true && charge === 0 )
         {
-            shoot = shoots.create(player.x,player.y+16,'shoot');
-            shoot.body.allowGravity = false;
-            shoot.allowGravity = false;
             arrow-- ;
             charge = 30;
     
             if(direction == 'left'){
-                shoot.setVelocityX(550);
+                shoot = shoots.create(player.x,player.y+16,'shoot');
+                shoot.body.allowGravity = false;
+                shoot.allowGravity = false;
+                
                 shoot.setFlipX(false);
+                shoot.setVelocityX(550);
+                
             }
             else if(direction == 'right') {
+                shoot = shoots.create(player.x,player.y+16,'shoot');
+                shoot.body.allowGravity = false;
+                shoot.allowGravity = false;
+
+                shoot.setFlipX(true);
                 shoot.setVelocityX(-550);
-                shoot.setFlipX(false);
+                
             }
             else if(direction == 'down'){
+                shoot = shoots.create(player.x,player.y+16,'shoot2');
+                shoot.body.allowGravity = false;
+                shoot.allowGravity = false;
+
+                shoot.setFlipY(false);
                 shoot.setVelocityY(-550);
-                shoot.setFlipX(false);
+                
             }
             else if (direction == 'up'){
+                shoot = shoots.create(player.x,player.y+16,'shoot2');
+                shoot.body.allowGravity = false;
+                shoot.allowGravity = false;
+
+                shoot.setFlipY(true);
                 shoot.setVelocityY(550);
-                shoot.setFlipX(true);
+            
             }
         }
 
@@ -525,28 +649,32 @@ class Scene2 extends Phaser.Scene{
             
     
             if(direction == 'left'){
-                coupepee = coups.create(player.x+30,player.y+16,'epee');
+                coupepee = coups.create(player.x+30,player.y+16,'CoupEpee');
+                coupepee.setFlipX(false);
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
                 charge = 35;
             }
             else if(direction == 'right') {
-                coupepee = coups.create(player.x-30,player.y+16,'epee');
+                coupepee = coups.create(player.x-30,player.y+16,'CoupEpee');
+                coupepee.setFlipX(true);
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
                 charge = 35;
             }
             else if(direction == 'down'){
-                coupepee = coups.create(player.x,player.y-20,'epee');
+                coupepee = coups.create(player.x,player.y-20,'CoupEpee');
+                coupepee.setRotation(-90);
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
                 charge = 35;
             }
             else if (direction == 'up'){
-                coupepee = coups.create(player.x,player.y+50,'epee');
+                coupepee = coups.create(player.x,player.y+50,'CoupEpee');
+                coupepee.setRotation(90);
                 coupepee.body.allowGravity = false;
                 coupepee.allowGravity = false;
                 setTimeout(function(){coupepee.destroy()}, 100);
@@ -564,10 +692,10 @@ class Scene2 extends Phaser.Scene{
                 player.anims.stop();
                 // If we were moving, pick and idle frame to use
                 
-                if (prevVelocity.x < 0) player.setTexture('player');
-                else if (prevVelocity.x > 0) player.setTexture('player');
-                else if (prevVelocity.y < 0) player.setTexture('player');
-                else if (prevVelocity.y > 0) player.setTexture('player');
+                if (prevVelocity.x < 0) player.setTexture('Persoleft');
+                else if (prevVelocity.x > 0) player.setTexture('Persoright');
+                else if (prevVelocity.y < 0) player.setTexture('Persoup');
+                else if (prevVelocity.y > 0) player.setTexture('Persodown');
               
                
             }  
@@ -598,33 +726,51 @@ class Scene2 extends Phaser.Scene{
             
             if (paddle.B && arrow >0 && getarc===true && charge === 0 )
             {
-                shoot = shoots.create(player.x,player.y+16,'shoot');
-                shoot.body.allowGravity = false;
-                shoot.allowGravity = false;
                 arrow-- ;
                 charge = 30;
         
                 if(direction == 'left'){
-                    shoot.setVelocityX(550);
+                    shoot = shoots.create(player.x,player.y+16,'shoot');
+                    shoot.body.allowGravity = false;
+                    shoot.allowGravity = false;
+                    
                     shoot.setFlipX(false);
+                    shoot.setVelocityX(550);
+                    
                 }
                 else if(direction == 'right') {
+                    shoot = shoots.create(player.x,player.y+16,'shoot');
+                    shoot.body.allowGravity = false;
+                    shoot.allowGravity = false;
+
+                    shoot.setFlipX(true);
                     shoot.setVelocityX(-550);
-                    shoot.setFlipX(false);
+                    
                 }
                 else if(direction == 'down'){
+                    shoot = shoots.create(player.x,player.y+16,'shoot2');
+                    shoot.body.allowGravity = false;
+                    shoot.allowGravity = false;
+
+                    shoot.setFlipY(false);
                     shoot.setVelocityY(-550);
-                    shoot.setFlipX(false);
+                    
                 }
                 else if (direction == 'up'){
+                    shoot = shoots.create(player.x,player.y+16,'shoot2');
+                    shoot.body.allowGravity = false;
+                    shoot.allowGravity = false;
+
+                    shoot.setFlipY(true);
                     shoot.setVelocityY(550);
-                    shoot.setFlipX(true);
                 }
             }
+
             if (paddle.A && getepee===true && charge === 0  )
             {
                 if(direction == 'left'){
                     coupepee = coups.create(player.x+30,player.y+16,'epee');
+                    coupepee.setFlipX(false);
                     coupepee.body.allowGravity = false;
                     coupepee.allowGravity = false;
                     setTimeout(function(){coupepee.destroy()}, 100);
@@ -638,7 +784,7 @@ class Scene2 extends Phaser.Scene{
                     charge = 35;
                 }
                 else if(direction == 'down'){
-                    coupepee = coups.create(player.x,player.y-20,'epee');
+                    coupepee = coups.create(player.x,player.y-20,'epee').setDepth(-1);
                     coupepee.body.allowGravity = false;
                     coupepee.allowGravity = false;
                     setTimeout(function(){coupepee.destroy()}, 100);
@@ -646,6 +792,7 @@ class Scene2 extends Phaser.Scene{
                 }
                 else if (direction == 'up'){
                     coupepee = coups.create(player.x,player.y+50,'epee');
+                    coupepee.setRotation(90);
                     coupepee.body.allowGravity = false;
                     coupepee.allowGravity = false;
                     setTimeout(function(){coupepee.destroy()}, 100);
