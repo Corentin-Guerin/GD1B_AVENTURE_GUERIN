@@ -221,9 +221,9 @@ class Scene3 extends Phaser.Scene {
 
     update (){
       
-      this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
+     /* this.add.text(16, 30, "Vie: " + life, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
-            .setScrollFactor(0);
+            .setScrollFactor(0);*/
 
       this.add.text(16, 75, "Flèches: " + arrow, {font: "18px monospace",fill: "#000000",padding: { x: 20, y: 10 },backgroundColor: "#ffffff"})
             .setDepth(12)
